@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Admin {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Doctor {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String           @unique
+  password       String
+  specialization String
+  bio            String?
+  available      Boolean          @default(true)
+  reviews        Review[]
+  timeSlots      DoctorTimeSlot[]
+  appointments   Appointment[]
+  favourites     Favourites[]
+  prescriptions  Prescription[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model Patient {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String         @unique
+  password      String
+  favourites    Favourites[]
+  reviews       Review[]
+  appointments  Appointment[]
+  prescriptions Prescription[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Appointment {
+  id           String            @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId     String            @db.ObjectId
+  patientId    String            @db.ObjectId
+  date         DateTime
+  timeSlot     String
+  status       AppointmentStatus @default(PENDING)
+  doctor       Doctor            @relation(fields: [doctorId], references: [id])
+  patient      Patient           @relation(fields: [patientId], references: [id])
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  Prescription Prescription?
+}
+
+model DoctorTimeSlot {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId  String   @db.ObjectId
+  date      DateTime
+  startTime DateTime
+  endTime   DateTime
+  available Boolean  @default(true)
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Favourites {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  patientId String @db.ObjectId
+  doctorId  String @db.ObjectId
+
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Medicine {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  dosage      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Prescription {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId      String      @db.ObjectId
+  patientId     String      @db.ObjectId
+  appointmentId String      @unique @db.ObjectId
+  medicines     String // Consider JSON type if storing array
+  doctor        Doctor      @relation(fields: [doctorId], references: [id])
+  patient       Patient     @relation(fields: [patientId], references: [id])
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Blog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  content    String
+  tags       String[] @default([])
+  authorId   String?  @db.ObjectId
+  authorName String // ✅ plain string for display name
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User?    @relation(fields: [userId], references: [id])
+  userId     String?  @db.ObjectId
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId  String   @db.ObjectId
+  patientId String   @db.ObjectId
+  rating    Int
+  comment   String?
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String   @unique
+  password   String
+  role       Role     @default(PATIENT)
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Blog       Blog[]
+}
+
+enum Role {
+  ADMIN
+  DOCTOR
+  PATIENT
+}

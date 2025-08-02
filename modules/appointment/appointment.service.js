@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppointmentService = void 0;
 const client_1 = require("@prisma/client");
-const appointment_model_1 = require("./appointment.model");
-const customError_1 = require("../../errors/customError");
-const constants_1 = require("../../constants");
+const appointment_model_1 = require("./appointment.model.js");
+const customError_1 = require("../../errors/customError.js");
+const constants_1 = require("../../constants/index.ts");
 exports.AppointmentService = {
     /**
      * Create a new appointment

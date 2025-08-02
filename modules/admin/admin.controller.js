@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changeUserRole = exports.approveDoctor = exports.getAllUsers = void 0;
 const client_1 = require("@prisma/client");
-const constants_1 = require("../../constants");
-const customError_1 = require("../../errors/customError");
-const helpers_1 = require("../../helpers");
+const constants_1 = require("../../constants/index.ts");
+const customError_1 = require("../../errors/customError.js");
+const helpers_1 = require("../../helpers/index.js");
 const prisma = new client_1.PrismaClient();
 /**
  * Get all users in the system

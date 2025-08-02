@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const admin_controller_1 = require("./admin.controller");
-const auth_1 = require("../../middlewares/auth");
+const auth_1 = require("../../middlewares/auth.ts");
 const router = (0, express_1.Router)();
 // All routes below are protected and admin-only
 router.use(auth_1.authenticate);

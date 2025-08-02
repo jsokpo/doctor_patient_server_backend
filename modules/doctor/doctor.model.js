@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DoctorModel = void 0;
-const prisma_1 = require("../../shared/prisma");
+const prisma_1 = require("../../shared/prisma.js");
 exports.DoctorModel = {
     create: async (data) => {
         return await prisma_1.prisma.doctor.create({ data });

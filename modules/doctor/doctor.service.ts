@@ -1,6 +1,6 @@
 import { prisma } from '../../shared/prisma';
 import { CustomError } from '../../errors/customError';
-import { HTTP_STATUS } from '../../constants';
+import { HTTP_STATUS } from '../../constants/index';
 
 export const DoctorService = {
   createDoctor: async (data: {

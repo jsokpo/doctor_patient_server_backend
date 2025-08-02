@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteDoctor = exports.updateDoctor = exports.getDoctorById = exports.getAllDoctors = exports.createDoctor = void 0;
-const doctor_service_1 = require("./doctor.service");
-const catchAsync_1 = require("../../shared/catchAsync");
-const sendResponse_1 = require("../../shared/sendResponse");
+const doctor_service_1 = require("./doctor.service.js");
+const catchAsync_1 = require("../../shared/catchAsync.js");
+const sendResponse_1 = require("../../shared/sendResponse.js");
 exports.createDoctor = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const doctorData = req.body;
     const result = await doctor_service_1.DoctorService.createDoctor(doctorData);

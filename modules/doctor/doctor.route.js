@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DoctorRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const doctor_controller_1 = require("./doctor.controller");
-const auth_1 = require("../../middlewares/auth");
+const auth_1 = require("../../middlewares/auth.ts");
 const router = express_1.default.Router();
 // Public route: Get all doctors
 router.get('/', doctor_controller_1.getAllDoctors);

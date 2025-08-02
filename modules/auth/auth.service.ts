@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { prisma } from '../../shared/prisma';
 import { CustomError } from '../../errors/customError';
-import { HTTP_STATUS } from '../../constants';
+import { HTTP_STATUS } from '../../constants/index';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 const JWT_EXPIRES_IN = '7d';

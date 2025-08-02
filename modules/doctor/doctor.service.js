@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DoctorService = void 0;
-const prisma_1 = require("../../shared/prisma");
-const customError_1 = require("../../errors/customError");
-const constants_1 = require("../../constants");
+const prisma_1 = require("../../shared/prisma.js");
+const customError_1 = require("../../errors/customError.js");
+const constants_1 = require("../../constants/index.ts");
 exports.DoctorService = {
     createDoctor: async (data) => {
         const existing = await prisma_1.prisma.doctor.findUnique({

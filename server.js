@@ -21,7 +21,7 @@ const startServer = async () => {
         console.log('🟢 Connected to the database successfully');
         // Start Express server
         app_1.default.listen(PORT, () => {
-            console.log(`🚀 Server running on https://your-app-name.onrender.com (PORT: ${PORT})`);
+            console.log(`🚀 Server running on https://doctorpatientapi.onrender.com (PORT: ${PORT})`);
         });
     }
     catch (error) {

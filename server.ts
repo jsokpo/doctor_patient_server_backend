@@ -21,7 +21,7 @@ const startServer = async () => {
 
     // Start Express server
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on https://your-app-name.onrender.com (PORT: ${PORT})`);
+      console.log(`🚀 Server running on https://doctorpatientapi.onrender.com (PORT: ${PORT})`);
     });
   } catch (error) {
     console.error('❌ Server failed to start:', error);

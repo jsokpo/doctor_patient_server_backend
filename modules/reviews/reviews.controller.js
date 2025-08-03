@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReview = exports.updateReview = exports.getReviewById = exports.getAllReviews = exports.createReview = void 0;
 const reviews_service_1 = require("./reviews.service");
-const error_1 = require("../../utils/error");
-const constants_1 = require("../../constants");
+const error_1 = require("../../utils/error.js");
+const constants_1 = require("../../constants/index.js");
 exports.createReview = (0, error_1.catchAsync)(async (req, res) => {
     const review = await reviews_service_1.ReviewService.create(req.body);
     res.status(constants_1.HTTP_STATUS.CREATED).json({ success: true, data: review });

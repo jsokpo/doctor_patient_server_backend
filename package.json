@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend server for Doctor-Patient Appointment App",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon server.ts",
     "build": "tsc",
-    "start": "node server.js",
+    "start": "node dist/server.js",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "prisma:generate": "prisma generate",
